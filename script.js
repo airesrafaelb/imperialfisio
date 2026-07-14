@@ -234,4 +234,50 @@ document.addEventListener('DOMContentLoaded', () => {
     e.stopPropagation();
   });
   
+  /* ==========================================================================
+     Dynamic Open/Closed Indicator
+     ========================================================================== */
+  const updateUnitStatus = () => {
+    const pacajusBadge = document.getElementById('status-pacajus');
+    const horizonteBadge = document.getElementById('status-horizonte');
+    
+    if (!pacajusBadge && !horizonteBadge) return;
+    
+    const getFortalezaTime = () => {
+      const now = new Date();
+      const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+      return new Date(utc + (3600000 * -3)); // America/Fortaleza (UTC-3)
+    };
+    
+    const time = getFortalezaTime();
+    const day = time.getDay();
+    const hour = time.getHours();
+    const minute = time.getMinutes();
+    const totalMinutes = hour * 60 + minute;
+    
+    const startMinutes = 7 * 60; // 07:00
+    let isOpen = false;
+    
+    if (day >= 1 && day <= 5) {
+      // Segunda a Sexta: 07h às 20h
+      isOpen = (totalMinutes >= startMinutes && totalMinutes < 20 * 60);
+    } else if (day === 6) {
+      // Sábado: 07h às 13h
+      isOpen = (totalMinutes >= startMinutes && totalMinutes < 13 * 60);
+    } // Domingo: fechado (isOpen is already false)
+    
+    const statusText = isOpen ? 'Aberto agora' : 'Fechado';
+    const statusClass = isOpen ? 'status-open' : 'status-closed';
+    
+    [pacajusBadge, horizonteBadge].forEach(badge => {
+      if (badge) {
+        badge.textContent = statusText;
+        badge.className = `status-badge ${statusClass}`;
+      }
+    });
+  };
+  
+  updateUnitStatus();
+  setInterval(updateUnitStatus, 60000);
+  
 });
