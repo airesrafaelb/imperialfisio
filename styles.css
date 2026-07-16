@@ -233,7 +233,7 @@ ul {
 }
 
 /* ==========================================================================
-   HEADER / MENU NAV
+   HEADER / MENU NAV (REFORMULADO)
    ========================================================================== */
 #main-header {
   position: fixed;
@@ -241,87 +241,191 @@ ul {
   left: 0;
   width: 100%;
   z-index: 1000;
-  background-color: var(--gradient-glass);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(0, 140, 69, 0.08);
-  transition: var(--transition);
+  background-color: var(--white);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.015), 0 1px 3px rgba(0, 0, 0, 0.015);
+  border-bottom: 1px solid rgba(0, 140, 69, 0.04);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-#main-header.scrolled {
-  padding: 0.5rem 0;
-  box-shadow: var(--shadow-sm);
-  background-color: rgba(255, 255, 255, 0.95);
-}
-
-.header-container {
+/* Container do Header Desktop */
+.header-desktop {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 85px;
-  transition: var(--transition);
+  height: 150px; /* Altura do header desktop */
+  padding: 0 56px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  max-width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
-#main-header.scrolled .header-container {
-  height: 70px;
+#main-header.scrolled .header-desktop {
+  height: 110px; /* Altura compacta no scroll */
 }
 
-.logo {
+/* Área Esquerda (~55%) */
+.header-left {
+  flex: 0 0 55%;
+  max-width: 55%;
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+}
+
+.logo-link {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
 }
 
 .logo-img {
-  height: 50px;
-  width: 50px;
+  height: 120px; /* Altura próxima à altura total do bloco de texto ao lado */
+  width: auto;
   object-fit: contain;
-  transition: var(--transition);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 #main-header.scrolled .logo-img {
-  height: 42px;
-  width: 42px;
+  height: 85px; /* Compacta no scroll */
 }
 
-.logo-text {
+/* Linha divisória vertical (cor verde escura sólida, altura acompanhando o bloco de texto) */
+.header-divider-vertical {
+  width: 1.5px;
+  height: 90px;
+  background-color: var(--primary-dark); /* Verde escuro */
+  margin: 0 24px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  flex-shrink: 0;
+}
+
+#main-header.scrolled .header-divider-vertical {
+  height: 65px;
+}
+
+/* Bloco de Texto da Marca */
+.brand-text {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
-.logo-name {
-  font-size: 1.35rem;
-  font-weight: 800;
+.brand-name {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 900; /* Peso 900 */
+  font-size: 58px;
+  line-height: 0.92;
   color: var(--primary-dark);
-  line-height: 1.1;
-}
-
-.logo-sub {
-  font-size: 0.75rem;
-  font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--text-muted);
+  letter-spacing: -0.015em;
+  margin: 0;
+  padding: 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.nav-list {
+#main-header.scrolled .brand-name {
+  font-size: 50px;
+}
+
+.brand-specialty {
   display: flex;
   align-items: center;
-  gap: 2.25rem;
+  justify-content: center;
+  gap: 8px;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  color: #333333;
+  text-transform: uppercase;
+  letter-spacing: 6px;
+  margin-top: 4px;
+  margin-bottom: 2px;
+  width: 100%;
+  white-space: nowrap;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#main-header.scrolled .brand-specialty {
+  font-size: 18px;
+  letter-spacing: 5px;
+}
+
+/* Linhas horizontais verdes finas nas laterais */
+.brand-specialty::before,
+.brand-specialty::after {
+  content: '';
+  display: block;
+  width: 25px;
+  height: 1.5px;
+  background-color: var(--primary);
+  opacity: 0.85;
+}
+
+.brand-slogan {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#main-header.scrolled .brand-slogan {
+  font-size: 11.5px;
+}
+
+/* Área Direita (~45%) */
+.header-right {
+  flex: 0 0 45%;
+  max-width: 45%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 16px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#main-header.scrolled .header-right {
+  gap: 10px;
+}
+
+/* Menu Principal Desktop */
+.nav-list-desktop {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .nav-link {
-  font-size: 0.95rem;
+  font-family: 'Outfit', sans-serif;
+  font-size: 14.5px;
   font-weight: 600;
   color: var(--text-dark);
+  text-decoration: none;
+  text-transform: uppercase; /* CAIXA ALTA */
+  letter-spacing: 2px; /* Letter-spacing maior */
   position: relative;
-  padding: 0.5rem 0;
+  padding: 4px 0;
+  transition: color 250ms ease;
+  white-space: nowrap;
 }
 
-.nav-link:hover, .nav-link.active {
+.nav-link:hover,
+.nav-link.active {
   color: var(--primary);
 }
 
+/* Underline animado */
 .nav-link::after {
   content: '';
   position: absolute;
@@ -332,48 +436,61 @@ ul {
   background-color: var(--primary);
   transform: scaleX(0);
   transform-origin: right;
-  transition: transform 0.3s ease;
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.nav-link:hover::after, .nav-link.active::after {
+.nav-link:hover::after,
+.nav-link.active::after {
   transform: scaleX(1);
   transform-origin: left;
 }
 
-.header-actions {
-  display: flex;
+/* Botão WhatsApp Desktop */
+.btn-whatsapp-desktop {
+  display: inline-flex;
   align-items: center;
-  gap: 1rem;
+  justify-content: center;
+  gap: 10px;
+  height: 48px;
+  padding: 0 30px;
+  border-radius: 999px; /* Pill shape */
+  background-color: var(--primary-dark); /* Verde escuro sólida */
+  color: var(--white);
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 10px rgba(0, 140, 69, 0.06);
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+  cursor: pointer;
 }
 
-.btn-header {
-  padding: 0.65rem 1.5rem;
-  font-size: 0.9rem;
-  border-radius: var(--radius-sm);
+.btn-whatsapp-desktop:hover {
+  background-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 92, 56, 0.14);
 }
 
-/* Hambúrguer Menu Mobile */
-.menu-toggle {
-  display: none;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 30px;
-  height: 21px;
+.icon-whatsapp-svg {
+  display: inline-block;
+  flex-shrink: 0;
+  fill: currentColor;
 }
 
-.bar {
-  width: 100%;
-  height: 3px;
-  background-color: var(--primary-dark);
-  border-radius: 2px;
-  transition: var(--transition);
+/* Offset global do scroll anchor */
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  scroll-padding-top: 110px; /* Offset para cabeçalho desktop encolhido */
 }
 
 /* ==========================================================================
    HERO SECTION
    ========================================================================== */
 .hero-section {
-  padding-top: 170px;
+  padding-top: 195px; /* Aumentado para dar respiro ao header desktop de 150px */
   padding-bottom: 6rem;
   background: radial-gradient(circle at 80% 20%, var(--primary-light) 0%, rgba(255,255,255,0) 60%), var(--white);
   position: relative;
@@ -1937,62 +2054,258 @@ ul {
 
 /* Tablets em Retrato / Mobile Grande (Até 768px) */
 @media (max-width: 768px) {
-  /* Menu Mobile Integrado */
-  .menu-toggle {
-    display: flex;
+  html {
+    scroll-padding-top: 50px; /* Offset compactado no scroll mobile */
   }
 
+  /* Ocultar cabeçalho Desktop */
+  .header-desktop {
+    display: none;
+  }
+  
+  /* Exibir cabeçalho Mobile */
+  .header-mobile {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0;
+    background-color: var(--white);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-sizing: border-box;
+    height: 240px; /* Altura para acomodar todos os itens confortavelmente */
+    overflow: hidden;
+  }
+
+  /* Ajuste de Espaçamento no Hero para evitar sobreposição */
+  .hero-section {
+    padding-top: 270px !important;
+  }
+  
+  /* Barra Superior Mobile (Topbar - Fundo verde escuro institucional) */
+  .header-mobile-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 50px;
+    background-color: var(--primary-dark); /* Fundo verde escuro */
+    padding: 0 24px;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 1001;
+  }
+
+  /* Hambúrguer Menu Mobile (☰) em branco */
+  .menu-toggle-mobile {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 26px;
+    height: 16px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    z-index: 1002;
+  }
+
+  .menu-toggle-mobile .bar {
+    width: 100%;
+    height: 2.2px;
+    background-color: var(--white); /* Ícones brancos */
+    border-radius: 2px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Animação do botão hambúrguer ativo */
+  .menu-toggle-mobile.active .bar:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .menu-toggle-mobile.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .menu-toggle-mobile.active .bar:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* WhatsApp superior mobile (Solto sobre o fundo verde, sem borda/quadrado) */
+  .btn-whatsapp-mobile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    transition: all 250ms ease;
+    text-decoration: none;
+    z-index: 1002;
+  }
+
+  .btn-whatsapp-mobile img {
+    display: block;
+    width: 22px;
+    height: 22px;
+    filter: brightness(0) invert(1); /* WhatsApp branco */
+  }
+
+  /* Área Central Mobile (Fundo Branco com Logomarca centralizada) */
+  .header-mobile-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 190px;
+    background-color: var(--white);
+    padding: 14px 24px 0 24px;
+    box-sizing: border-box;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .logo-link-mobile {
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .logo-img-mobile {
+    height: 70px; /* Logo circular média */
+    width: auto;
+    object-fit: contain;
+  }
+
+  .brand-name-mobile {
+    font-family: 'Outfit', sans-serif;
+    font-size: 34px;
+    font-weight: 900;
+    line-height: 0.95;
+    color: var(--primary-dark); /* Verde escuro */
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 2px;
+    letter-spacing: -0.5px;
+  }
+
+  .brand-specialty-mobile {
+    font-family: 'Outfit', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: #333333; /* Cinza escuro */
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-align: center;
+    margin-bottom: 2px;
+  }
+
+  /* Linha horizontal com coração centralizado */
+  .mobile-slogan-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 4px 0;
+    gap: 12px;
+  }
+
+  .mobile-slogan-line {
+    height: 1px;
+    flex: 1;
+    max-width: 80px;
+    background-color: #A0B2A6;
+    opacity: 0.4;
+  }
+
+  .mobile-heart-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border: 1px solid var(--primary);
+    border-radius: 50%;
+    color: var(--primary);
+    background-color: var(--white);
+  }
+
+  .brand-slogan-mobile {
+    font-family: 'Outfit', sans-serif;
+    font-size: 10.5px;
+    font-weight: 500;
+    color: var(--primary); /* Verde institucional */
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 0.5px;
+  }
+
+  /* Divisor de Onda svg (transição suave para a próxima seção) */
+  .mobile-header-wave {
+    width: 100%;
+    height: 20px;
+    margin-top: 6px;
+    flex-shrink: 0;
+  }
+
+  .mobile-header-wave svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  /* Comportamento dinâmico no scroll mobile */
+  #main-header.scrolled .header-mobile {
+    height: 50px; /* Reduz para apenas a barra superior */
+  }
+  
+  #main-header.scrolled .header-mobile-center {
+    opacity: 0;
+    max-height: 0;
+    margin-top: 0;
+    pointer-events: none;
+    overflow: hidden;
+    transform: translateY(-10px);
+  }
+
+  /* Menu Drawer Mobile */
   #nav-menu {
     position: fixed;
-    top: 85px;
+    top: 240px; /* Alinhado à altura inicial */
     left: -100%;
     width: 100%;
-    height: calc(100vh - 85px);
+    height: calc(100vh - 240px);
     background-color: var(--white);
-    padding: 3rem 1.5rem;
-    box-shadow: var(--shadow-lg);
-    transition: var(--transition);
+    padding: 3rem 2rem;
+    box-shadow: 0 15px 30px rgba(0, 92, 56, 0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 998;
     overflow-y: auto;
+    display: block;
   }
 
   #nav-menu.active {
     left: 0;
   }
 
-  .nav-list {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 1.75rem;
-  }
-
-  .nav-link {
-    font-size: 1.15rem;
-    display: block;
-    border-bottom: 1px solid rgba(0,0,0,0.05);
-    padding-bottom: 0.75rem;
-  }
-
-  .btn-header {
-    display: none; /* Oculta na barra do topo no mobile */
-  }
-
   #main-header.scrolled #nav-menu {
-    top: 70px;
-    height: calc(100vh - 70px);
+    top: 50px;
+    height: calc(100vh - 50px);
   }
 
-  /* Mudança nas animações e Hambúrguer */
-  .menu-toggle.active .bar:nth-child(1) {
-    transform: translateY(9px) rotate(45deg);
+  .nav-list-mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
   }
 
-  .menu-toggle.active .bar:nth-child(2) {
-    opacity: 0;
-  }
-
-  .menu-toggle.active .bar:nth-child(3) {
-    transform: translateY(-9px) rotate(-45deg);
+  .nav-list-mobile .nav-link {
+    font-size: 1.25rem;
+    display: block;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    padding-bottom: 0.85rem;
   }
 
   /* Grid e Slider Depoimentos */

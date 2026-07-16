@@ -45,12 +45,6 @@ document.addEventListener('DOMContentLoaded', () => {
      active navigation links on scroll (intersection observer)
      ========================================================================== */
   const sections = document.querySelectorAll('section, footer');
-  const navLinkMap = {};
-  
-  navLinks.forEach(link => {
-    const targetId = link.getAttribute('href').substring(1);
-    navLinkMap[targetId] = link;
-  });
 
   const observerOptions = {
     root: null,
@@ -63,13 +57,15 @@ document.addEventListener('DOMContentLoaded', () => {
       if (entry.isIntersecting) {
         const id = entry.target.getAttribute('id');
         
-        // Remove active class from all links
-        navLinks.forEach(link => link.classList.remove('active'));
-        
-        // Add active class to visible section link
-        if (navLinkMap[id]) {
-          navLinkMap[id].classList.add('active');
-        }
+        // Atualiza a classe active para todos os links correspondentes (Desktop e Mobile)
+        navLinks.forEach(link => {
+          const targetId = link.getAttribute('href').substring(1);
+          if (targetId === id) {
+            link.classList.add('active');
+          } else {
+            link.classList.remove('active');
+          }
+        });
       }
     });
   };
@@ -286,5 +282,33 @@ document.addEventListener('DOMContentLoaded', () => {
   
   updateUnitStatus();
   setInterval(updateUnitStatus, 60000);
+
+  /* ==========================================================================
+     whatsapp header button integration
+     ========================================================================== */
+  const headerWaBtns = [
+    document.getElementById('btn-header-whatsapp-desktop'),
+    document.getElementById('btn-header-whatsapp-mobile')
+  ];
+
+  headerWaBtns.forEach(btn => {
+    if (btn) {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        if (waPanel) {
+          const isPanelOpen = waPanel.classList.contains('show');
+          if (!isPanelOpen) {
+            waPanel.classList.add('show');
+            if (waTrigger) waTrigger.classList.add('active');
+          } else {
+            waPanel.classList.remove('show');
+            if (waTrigger) waTrigger.classList.remove('active');
+          }
+        }
+      });
+    }
+  });
   
 });

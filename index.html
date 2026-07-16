@@ -22,7 +22,7 @@
   <!-- Google Fonts: Outfit (Moderna, elegante e humanizada) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -30,35 +30,97 @@
 
   <!-- HEADER -->
   <header id="main-header">
-    <div class="container header-container">
-      <a href="#inicio" class="logo" id="logo-link">
-        <img src="logo.png" alt="Imperial Fisio Logo" class="logo-img">
-        <div class="logo-text">
-          <span class="logo-name">Imperial Fisio</span>
-          <span class="logo-sub">Pilates & Fisioterapia</span>
+    <!-- DESKTOP HEADER (oculto no mobile) -->
+    <div class="header-desktop">
+      <!-- Área Esquerda (~55%) -->
+      <div class="header-left">
+        <a href="#inicio" class="logo-link">
+          <img src="logo.png" alt="Imperial Fisio Logo" class="logo-img">
+        </a>
+        <div class="header-divider-vertical"></div>
+        <div class="brand-text">
+          <h1 class="brand-name">IMPERIAL FISIO</h1>
+          <div class="brand-specialty">PILATES & FISIOTERAPIA</div>
+          <p class="brand-slogan">CUIDAR DE VOCÊ É A NOSSA MISSÃO</p>
         </div>
-      </a>
+      </div>
 
-      <!-- Menu de Navegação -->
-      <nav id="nav-menu" aria-label="Menu Principal">
-        <ul class="nav-list">
-          <li><a href="#sobre" class="nav-link">Sobre</a></li>
+      <!-- Área Direita (~45%) -->
+      <div class="header-right">
+        <!-- Menu Principal Desktop -->
+        <nav aria-label="Menu Principal">
+          <ul class="nav-list-desktop">
+            <li><a href="#inicio" class="nav-link">Início</a></li>
+            <li><a href="#especialidades" class="nav-link">Especialidades</a></li>
+            <li><a href="#convenios" class="nav-link">Convênios</a></li>
+            <li><a href="#unidades" class="nav-link">Unidades</a></li>
+            <li><a href="#contato" class="nav-link">Contato</a></li>
+          </ul>
+        </nav>
+        
+        <!-- Botão WhatsApp Desktop -->
+        <a href="#" class="btn-whatsapp-desktop" id="btn-header-whatsapp-desktop">
+          <img src="assets/icons/whatsapp.svg" class="icon-whatsapp-svg" alt="WhatsApp" width="20" height="20">
+          <span>AGENDE PELO WHATSAPP</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- MOBILE HEADER (oculto no desktop) -->
+    <div class="header-mobile">
+      <!-- Barra Superior -->
+      <div class="header-mobile-top">
+        <button class="menu-toggle-mobile" id="menu-toggle-btn" aria-label="Abrir Menu" aria-controls="nav-menu">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+        
+        <a href="#" class="btn-whatsapp-mobile" id="btn-header-whatsapp-mobile" aria-label="WhatsApp">
+          <img src="assets/icons/whatsapp.svg" class="icon-whatsapp-svg" alt="WhatsApp" width="22" height="22">
+        </a>
+      </div>
+
+      <!-- Área Central -->
+      <div class="header-mobile-center">
+        <a href="#inicio" class="logo-link-mobile">
+          <img src="logo.png" alt="Imperial Fisio Logo" class="logo-img-mobile">
+        </a>
+        <div class="brand-name-mobile">IMPERIAL FISIO</div>
+        <div class="brand-specialty-mobile">— PILATES & FISIOTERAPIA —</div>
+        
+        <!-- Linha horizontal fina com ícone de coração centralizado -->
+        <div class="mobile-slogan-container">
+          <div class="mobile-slogan-line"></div>
+          <div class="mobile-heart-icon">
+            <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </svg>
+          </div>
+          <div class="mobile-slogan-line"></div>
+        </div>
+        
+        <div class="brand-slogan-mobile">CUIDAR DE VOCÊ É A NOSSA MISSÃO</div>
+        
+        <!-- Divisor de Onda SVG -->
+        <div class="mobile-header-wave">
+          <svg viewBox="0 0 390 30" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 0 C 130 18, 260 18, 390 0 L 390 18 C 260 30, 130 30, 0 18 Z" fill="#E8F6EF"/>
+            <path d="M0 18 C 130 30, 260 30, 390 18 L 390 30 L 0 30 Z" fill="#005C38"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Menu Lateral de Navegação (Mobile Drawer) -->
+      <nav id="nav-menu" aria-label="Menu Principal Mobile">
+        <ul class="nav-list-mobile">
+          <li><a href="#inicio" class="nav-link">Início</a></li>
           <li><a href="#especialidades" class="nav-link">Especialidades</a></li>
-          <li><a href="#pilates" class="nav-link">Pilates</a></li>
           <li><a href="#convenios" class="nav-link">Convênios</a></li>
           <li><a href="#unidades" class="nav-link">Unidades</a></li>
           <li><a href="#contato" class="nav-link">Contato</a></li>
         </ul>
       </nav>
-
-      <div class="header-actions">
-        <a href="#unidades" class="btn btn-primary btn-header" id="btn-header-agendar">Agendar</a>
-        <button class="menu-toggle" id="menu-toggle-btn" aria-label="Abrir Menu" aria-controls="nav-menu">
-          <span class="bar"></span>
-          <span class="bar"></span>
-          <span class="bar"></span>
-        </button>
-      </div>
     </div>
   </header>
 
