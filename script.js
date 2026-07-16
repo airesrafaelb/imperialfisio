@@ -45,6 +45,12 @@ document.addEventListener('DOMContentLoaded', () => {
      active navigation links on scroll (intersection observer)
      ========================================================================== */
   const sections = document.querySelectorAll('section, footer');
+  const navLinkMap = {};
+  
+  navLinks.forEach(link => {
+    const targetId = link.getAttribute('href').substring(1);
+    navLinkMap[targetId] = link;
+  });
 
   const observerOptions = {
     root: null,
@@ -57,15 +63,13 @@ document.addEventListener('DOMContentLoaded', () => {
       if (entry.isIntersecting) {
         const id = entry.target.getAttribute('id');
         
-        // Atualiza a classe active para todos os links correspondentes (Desktop e Mobile)
-        navLinks.forEach(link => {
-          const targetId = link.getAttribute('href').substring(1);
-          if (targetId === id) {
-            link.classList.add('active');
-          } else {
-            link.classList.remove('active');
-          }
-        });
+        // Remove active class from all links
+        navLinks.forEach(link => link.classList.remove('active'));
+        
+        // Add active class to visible section link
+        if (navLinkMap[id]) {
+          navLinkMap[id].classList.add('active');
+        }
       }
     });
   };
@@ -127,11 +131,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const updateSlider = () => {
     if (cards.length === 0) return;
     
+    const cardStyle = window.getComputedStyle(cards[0]);
     const cardWidth = cards[0].offsetWidth;
-    const gap = parseFloat(window.getComputedStyle(slider).gap) || 0;
+    const marginRight = parseFloat(cardStyle.marginRight) || 0;
     
-    // Gap size matches the grid gap
-    const slideOffset = currentIndex * (cardWidth + gap);
+    // Gap size matches the grid gap / margin
+    const slideOffset = currentIndex * (cardWidth + marginRight);
     slider.style.transform = `translateX(-${slideOffset}px)`;
     
     // Update active dot
@@ -203,11 +208,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const waPanel = document.getElementById('wa-panel');
   const waClose = document.getElementById('wa-close-panel');
   const waContainer = document.getElementById('wa-floating-container');
+  const badge = waTrigger.querySelector('.wa-notification-badge');
 
   const toggleWaPanel = (e) => {
     e.stopPropagation();
     waPanel.classList.toggle('show');
     waTrigger.classList.toggle('active');
+    
+    // Hide notification badge when user interacts
+    if (badge) {
+      badge.style.display = 'none';
+    }
   };
 
   const closeWaPanel = () => {
@@ -275,33 +286,5 @@ document.addEventListener('DOMContentLoaded', () => {
   
   updateUnitStatus();
   setInterval(updateUnitStatus, 60000);
-
-  /* ==========================================================================
-     whatsapp header button integration
-     ========================================================================== */
-  const headerWaBtns = [
-    document.getElementById('btn-header-whatsapp-desktop'),
-    document.getElementById('btn-header-whatsapp-mobile')
-  ];
-
-  headerWaBtns.forEach(btn => {
-    if (btn) {
-      btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        
-        if (waPanel) {
-          const isPanelOpen = waPanel.classList.contains('show');
-          if (!isPanelOpen) {
-            waPanel.classList.add('show');
-            if (waTrigger) waTrigger.classList.add('active');
-          } else {
-            waPanel.classList.remove('show');
-            if (waTrigger) waTrigger.classList.remove('active');
-          }
-        }
-      });
-    }
-  });
   
 });
