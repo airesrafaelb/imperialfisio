@@ -232,7 +232,7 @@ ul {
 }
 
 /* ==========================================================================
-   HEADER / MENU NAV
+   HEADER / MENU NAV (REFORMULADO)
    ========================================================================== */
 #main-header {
   position: fixed;
@@ -240,87 +240,189 @@ ul {
   left: 0;
   width: 100%;
   z-index: 1000;
-  background-color: var(--gradient-glass);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(0, 140, 69, 0.08);
-  transition: var(--transition);
+  background-color: var(--white);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.015), 0 1px 3px rgba(0, 0, 0, 0.015);
+  border-bottom: 1px solid rgba(0, 140, 69, 0.04);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-#main-header.scrolled {
-  padding: 0.5rem 0;
-  box-shadow: var(--shadow-sm);
-  background-color: rgba(255, 255, 255, 0.95);
-}
-
-.header-container {
+/* Container do Header Desktop */
+.header-desktop {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 85px;
-  transition: var(--transition);
+  height: 125px; /* Altura: 115px a 125px */
+  padding: 0 56px; /* Padding lateral: 56px */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  max-width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
-#main-header.scrolled .header-container {
-  height: 70px;
+#main-header.scrolled .header-desktop {
+  height: 115px; /* Altura compacta no scroll */
 }
 
-.logo {
+/* Área Esquerda (~55%) */
+.header-left {
+  flex: 0 0 55%;
+  max-width: 55%;
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+}
+
+.logo-link {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
 }
 
 .logo-img {
-  height: 50px;
-  width: 50px;
+  height: 98px; /* Tamanho: 90px a 105px */
+  width: auto;
   object-fit: contain;
-  transition: var(--transition);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 #main-header.scrolled .logo-img {
-  height: 42px;
-  width: 42px;
+  height: 90px; /* Tamanho compacto no scroll (nunca menor que 90px) */
 }
 
-.logo-text {
+/* Linha divisória vertical */
+.header-divider-vertical {
+  width: 1px;
+  height: 80px;
+  background-color: rgba(0, 92, 56, 0.15);
+  margin: 0 24px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  flex-shrink: 0;
+}
+
+#main-header.scrolled .header-divider-vertical {
+  height: 70px;
+}
+
+/* Bloco de Texto da Marca */
+.brand-text {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
-.logo-name {
-  font-size: 1.35rem;
-  font-weight: 800;
-  color: var(--primary-dark);
-  line-height: 1.1;
-}
-
-.logo-sub {
-  font-size: 0.75rem;
-  font-weight: 500;
+.brand-name {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 900; /* Peso 900 */
+  font-size: 58px; /* Tamanho: 58px a 68px */
+  line-height: 0.92; /* Line-height: 0.90 a 1.0 */
+  color: var(--primary-dark); /* Verde institucional */
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--text-muted);
+  letter-spacing: -0.015em;
+  margin: 0;
+  padding: 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.nav-list {
+#main-header.scrolled .brand-name {
+  font-size: 54px;
+}
+
+.brand-specialty {
   display: flex;
   align-items: center;
-  gap: 2.25rem;
+  justify-content: center;
+  gap: 8px;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 500; /* Peso 500 */
+  font-size: 20px; /* Fonte entre 19px e 22px */
+  color: #333333; /* Cinza escuro */
+  text-transform: uppercase;
+  letter-spacing: 6px; /* Letter spacing entre 5px e 7px */
+  margin-top: 4px;
+  margin-bottom: 2px;
+  width: 100%;
+  white-space: nowrap;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#main-header.scrolled .brand-specialty {
+  font-size: 18px;
+  letter-spacing: 5px;
+}
+
+/* Linhas horizontais verdes finas nas laterais */
+.brand-specialty::before,
+.brand-specialty::after {
+  content: '';
+  display: block;
+  width: 25px;
+  height: 1.5px;
+  background-color: var(--primary);
+  opacity: 0.85;
+}
+
+.brand-slogan {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 500;
+  font-size: 13px; /* Fonte: 13px a 15px */
+  color: var(--primary); /* Verde institucional */
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#main-header.scrolled .brand-slogan {
+  font-size: 12px;
+}
+
+/* Área Direita (~45%) */
+.header-right {
+  flex: 0 0 45%;
+  max-width: 45%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 12px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#main-header.scrolled .header-right {
+  gap: 8px;
+}
+
+/* Menu Principal Desktop */
+.nav-list-desktop {
+  display: flex;
+  align-items: center;
+  gap: 40px; /* Espaçamento entre itens: 40px */
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .nav-link {
-  font-size: 0.95rem;
-  font-weight: 600;
+  font-family: 'Outfit', sans-serif;
+  font-size: 17px; /* Fonte: 17px */
+  font-weight: 600; /* Peso: 600 */
   color: var(--text-dark);
+  text-decoration: none;
   position: relative;
-  padding: 0.5rem 0;
+  padding: 4px 0;
+  transition: color 250ms ease;
+  white-space: nowrap;
 }
 
-.nav-link:hover, .nav-link.active {
+.nav-link:hover,
+.nav-link.active {
   color: var(--primary);
 }
 
+/* Underline animado (transição de 250ms) */
 .nav-link::after {
   content: '';
   position: absolute;
@@ -331,41 +433,47 @@ ul {
   background-color: var(--primary);
   transform: scaleX(0);
   transform-origin: right;
-  transition: transform 0.3s ease;
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.nav-link:hover::after, .nav-link.active::after {
+.nav-link:hover::after,
+.nav-link.active::after {
   transform: scaleX(1);
   transform-origin: left;
 }
 
-.header-actions {
-  display: flex;
+/* Botão WhatsApp Desktop */
+.btn-whatsapp-desktop {
+  display: inline-flex;
   align-items: center;
-  gap: 1rem;
+  justify-content: center;
+  gap: 10px;
+  height: 48px; /* Altura: 48px */
+  padding: 0 30px; /* Padding horizontal: 30px */
+  border-radius: 999px; /* Border-radius: 999px */
+  background-color: var(--primary); /* Cor: Verde institucional */
+  color: var(--white);
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 10px rgba(0, 140, 69, 0.06); /* Sombra extremamente discreta */
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1); /* Animação suave no hover */
+  text-decoration: none;
+  cursor: pointer;
 }
 
-.btn-header {
-  padding: 0.65rem 1.5rem;
-  font-size: 0.9rem;
-  border-radius: var(--radius-sm);
-}
-
-/* Hambúrguer Menu Mobile */
-.menu-toggle {
-  display: none;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 30px;
-  height: 21px;
-}
-
-.bar {
-  width: 100%;
-  height: 3px;
+.btn-whatsapp-desktop:hover {
   background-color: var(--primary-dark);
-  border-radius: 2px;
-  transition: var(--transition);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 92, 56, 0.14);
+}
+
+.icon-whatsapp-svg {
+  fill: currentColor;
+  display: inline-block;
+  flex-shrink: 0;
 }
 
 /* ==========================================================================
@@ -903,6 +1011,93 @@ ul {
   box-shadow: var(--shadow-md);
 }
 
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.85rem;
+  font-weight: 700;
+  font-size: 0.85rem;
+  border-radius: var(--radius-full);
+  line-height: 1;
+}
+
+.status-badge::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.status-badge.status-open {
+  background-color: #E8F6EF;
+  color: #008C45;
+}
+
+.status-badge.status-open::before {
+  background-color: #00C853;
+  box-shadow: 0 0 0 0 rgba(0, 200, 83, 0.4);
+  animation: pulse-green 2s infinite;
+}
+
+.status-badge.status-closed {
+  background-color: #FDE8E8;
+  color: #9B1C1C;
+}
+
+.status-badge.status-closed::before {
+  background-color: #D32F2F;
+}
+
+@keyframes pulse-green {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(0, 200, 83, 0.7);
+  }
+  
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 6px rgba(0, 200, 83, 0);
+  }
+  
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(0, 200, 83, 0);
+  }
+}
+
+.facade-pacajus-wrapper {
+  position: relative;
+  overflow: hidden;
+  background-color: #1F2933;
+}
+
+.facade-pacajus-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('assets/facade-pacajus.jpg');
+  background-size: cover;
+  background-position: center;
+  filter: blur(12px) brightness(0.85);
+  transform: scale(1.15);
+  z-index: 0;
+}
+
+.facade-pacajus-wrapper .unit-badge {
+  z-index: 2;
+}
+
+.facade-pacajus-wrapper img {
+  position: relative;
+  z-index: 1;
+  object-fit: contain !important;
+}
+
 .unit-info {
   padding: 2.25rem 2rem;
   display: flex;
@@ -1126,6 +1321,7 @@ ul {
   text-overflow: unset !important;
   white-space: normal !important;
   -webkit-line-clamp: unset !important;
+  line-clamp: unset !important;
   height: auto !important;
   max-height: none !important;
   display: block !important;
@@ -1835,64 +2031,266 @@ ul {
   }
 }
 
+/* ==========================================================================
+   MOBILE HEADER STYLE (GLOBAL - OCULTO NO DESKTOP)
+   ========================================================================== */
+.header-mobile {
+  display: none;
+}
+
+.menu-toggle-mobile {
+  display: none;
+}
+
 /* Tablets em Retrato / Mobile Grande (Até 768px) */
 @media (max-width: 768px) {
-  /* Menu Mobile Integrado */
-  .menu-toggle {
+  /* Ocultar cabeçalho Desktop */
+  .header-desktop {
+    display: none;
+  }
+  
+  /* Exibir cabeçalho Mobile */
+  .header-mobile {
     display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 16px 24px;
+    background-color: var(--white);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-sizing: border-box;
+    height: 200px; /* Altura: 180px a 210px */
   }
 
+  /* Ajuste de Espaçamento no Hero */
+  .hero-section {
+    padding-top: 240px !important;
+  }
+  
+  /* Comportamento dinâmico no scroll mobile */
+  #main-header.scrolled .header-mobile {
+    height: 70px;
+    padding: 12px 24px;
+  }
+  
+  #main-header.scrolled .header-mobile-center {
+    opacity: 0;
+    max-height: 0;
+    margin-top: 0;
+    pointer-events: none;
+    overflow: hidden;
+    transform: translateY(-10px);
+  }
+  
+  #main-header.scrolled .mobile-top-brand {
+    opacity: 1;
+    transform: translate(-50%, 0);
+    pointer-events: auto;
+  }
+  
+  #main-header.scrolled .nav-menu-mobile {
+    top: 70px;
+    height: calc(100vh - 70px);
+  }
+
+  /* Barra Superior Mobile */
+  .header-mobile-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 44px;
+    position: relative;
+  }
+
+  /* Hambúrguer Menu Mobile */
+  .menu-toggle-mobile {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 28px;
+    height: 18px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    z-index: 1001;
+  }
+
+  .menu-toggle-mobile .bar {
+    width: 100%;
+    height: 2.5px;
+    background-color: var(--primary-dark);
+    border-radius: 2px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Animação do botão hambúrguer ativo */
+  .menu-toggle-mobile.active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .menu-toggle-mobile.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .menu-toggle-mobile.active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  /* Marca compacta no topo no scroll */
+  .mobile-top-brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    transform: translate(-50%, 0);
+    position: absolute;
+    left: 50%;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+    white-space: nowrap;
+  }
+
+  .mobile-top-logo-img {
+    height: 38px;
+    width: 38px;
+    object-fit: contain;
+  }
+
+  .mobile-top-logo-name {
+    font-family: 'Outfit', sans-serif;
+    font-size: 19px;
+    font-weight: 900;
+    color: var(--primary-dark);
+    letter-spacing: -0.2px;
+  }
+
+  /* Botão WhatsApp Mobile */
+  .btn-whatsapp-mobile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border: 1.5px solid rgba(0, 92, 56, 0.15);
+    border-radius: 10px;
+    background-color: var(--white);
+    color: var(--primary);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+    transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none;
+  }
+
+  .btn-whatsapp-mobile:hover {
+    background-color: var(--primary-light);
+    color: var(--primary-dark);
+    transform: scale(1.05);
+  }
+
+  /* Área Central Mobile */
+  .header-mobile-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 14px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .logo-link-mobile {
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .logo-img-mobile {
+    height: 80px; /* Tamanho: 75px a 85px */
+    width: auto;
+    object-fit: contain;
+  }
+
+  .brand-name-mobile {
+    font-family: 'Outfit', sans-serif;
+    font-size: 46px; /* Tamanho: 44px a 50px */
+    font-weight: 900;
+    line-height: 0.95;
+    color: var(--primary-dark);
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 4px;
+  }
+
+  .brand-specialty-mobile {
+    font-family: 'Outfit', sans-serif;
+    font-size: 16px; /* Tamanho: 16px a 18px */
+    font-weight: 500;
+    color: #333333;
+    text-transform: uppercase;
+    letter-spacing: 4px; /* Letter spacing: 4px */
+    text-align: center;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    width: 100%;
+  }
+
+  .brand-specialty-mobile::before,
+  .brand-specialty-mobile::after {
+    content: '';
+    display: block;
+    width: 12px;
+    height: 1px;
+    background-color: var(--primary);
+    opacity: 0.8;
+  }
+
+  .brand-slogan-mobile {
+    font-family: 'Outfit', sans-serif;
+    font-size: 13px; /* Slogan: 13px */
+    font-weight: 500;
+    color: var(--primary); /* Cor verde */
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 0.5px;
+  }
+
+  /* Menu Drawer Mobile */
   #nav-menu {
     position: fixed;
-    top: 85px;
+    top: 200px; /* Alinhado à altura inicial */
     left: -100%;
     width: 100%;
-    height: calc(100vh - 85px);
+    height: calc(100vh - 200px);
     background-color: var(--white);
-    padding: 3rem 1.5rem;
-    box-shadow: var(--shadow-lg);
-    transition: var(--transition);
+    padding: 3rem 2rem;
+    box-shadow: 0 15px 30px rgba(0, 92, 56, 0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 998;
     overflow-y: auto;
+    display: block;
   }
 
   #nav-menu.active {
     left: 0;
   }
 
-  .nav-list {
+  .nav-list-mobile {
+    display: flex;
     flex-direction: column;
-    align-items: stretch;
-    gap: 1.75rem;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
   }
 
-  .nav-link {
-    font-size: 1.15rem;
+  .nav-list-mobile .nav-link {
+    font-size: 1.25rem;
     display: block;
-    border-bottom: 1px solid rgba(0,0,0,0.05);
-    padding-bottom: 0.75rem;
-  }
-
-  .btn-header {
-    display: none; /* Oculta na barra do topo no mobile */
-  }
-
-  #main-header.scrolled #nav-menu {
-    top: 70px;
-    height: calc(100vh - 70px);
-  }
-
-  /* Mudança nas animações e Hambúrguer */
-  .menu-toggle.active .bar:nth-child(1) {
-    transform: translateY(9px) rotate(45deg);
-  }
-
-  .menu-toggle.active .bar:nth-child(2) {
-    opacity: 0;
-  }
-
-  .menu-toggle.active .bar:nth-child(3) {
-    transform: translateY(-9px) rotate(-45deg);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    padding-bottom: 0.85rem;
   }
 
   /* Grid e Slider Depoimentos */
